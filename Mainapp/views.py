@@ -96,14 +96,14 @@ def predict(request):
         text = request.POST['text']
         
         # Predict
-        predict = 0 # Label of hate speech or not a hate speech (default non hate speech)
+        hate_speech_predict = 0 # Label of hate speech or not a hate speech (default non hate speech)
         if (text.strip() != ""): # if text is not empty after preprocessing, predict to model
-            # TODO: Predict from post data
-            pass
+            hate_speech_predict = predict_hate_speech(text)
+            full_prediction = predict_full_hate_speech(text)
             
         # TODO: Save to database
         
-        if predict == 1: # Hate speech
+        if hate_speech_predict == 1: # Hate speech
             return redirect(f"/hate_speech_detail/{predict_id}")
         else:
             return redirect("/no_hate_speech")
